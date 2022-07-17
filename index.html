@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
 
-
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -186,7 +186,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://tssunshine.github.io/WEB/Http_Request_Method">
+    <link itemprop="mainEntityOfPage" href="https://tssunshine.github.io/WEB/http-request-method.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -204,7 +204,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/WEB/Http_Request_Method" class="post-title-link" itemprop="url">Http Request Method</a>
+          <a href="/WEB/http-request-method.html" class="post-title-link" itemprop="url">Http Request Method</a>
         </h2>
 
         <div class="post-meta-container">
@@ -222,7 +222,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-07-17 23:37:20" itemprop="dateModified" datetime="2022-07-17T23:37:20+08:00">2022-07-17</time>
+      <time title="修改时间：2022-07-18 00:46:52" itemprop="dateModified" datetime="2022-07-18T00:46:52+08:00">2022-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -235,7 +235,6 @@
     </span>
 
   
-    <span class="post-meta-break"></span>
     <span class="post-meta-item" title="本文字数">
       <span class="post-meta-item-icon">
         <i class="far fa-file-word"></i>
@@ -260,163 +259,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="Http-Request-Method"><a href="#Http-Request-Method" class="headerlink" title="Http Request Method"></a>Http Request Method</h1><p>HTTP Method 是可以自定义的，并且区分大小写。</p>
-<ul>
-<li><p>GET</p>
-<p><strong>Http GET 方法</strong>请求指定的资源。使用 <strong>GET</strong> 的请求一般只用于获取数据。</p>
-<ul>
-<li><p>语法</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /index.html</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Request库实现</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.get(url)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>规范</p>
-<p>Hypertext Transfer Protocol (HTTP&#x2F;1.1): Semantics and Content</p>
-<p><a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1">https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1</a></p>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p>POST</p>
-<p><strong>Http POST 方法</strong>发送数据给服务器。请求主体的类型由 <strong>Content-Type 首部指定。</strong></p>
-<p>PUT 和 POST方法的区别是，PUT方法是幂等的：连续调用一次或者多次的效果相同（无副作用）。连续调用同一个POST可能会带来额外的影响，比如多次提交表单。</p>
-<ul>
-<li><p>一个 POST 请求通常是通过 HTML 表单发送，并返回服务器的修改结果。在这种情况下 content-type 是通过在 <form> 元素中设置正确的 <code>enctype</code> 属性，或是在 <input> 和 <button> 元素中设置 <code>formenctype</code> 属性来选择的</p>
-<ul>
-<li><code>application/x-www-form-urlencoded</code> ：数据被编码成以’&amp;’分隔的键-值对，同时以’&#x3D;’分隔键和值。非字母或数字的字符会被<strong>percent-encoding：</strong>该类型不支持二进制数据的原因（以<code>Multipart/form-data</code>代替）</li>
-<li><code>multipart/form-data</code></li>
-<li><code>text/plain</code></li>
-</ul>
-</li>
-<li><p>当 POST 请求是通过除HTML表单之外的方式发送时，例如使用 XMLHttpRequest，那么请求主体可以是任何类型。按 HTTP 1.1 规范中描述， POST以统一的方法涵盖以下功能</p>
-<ul>
-<li>注释已有的资源</li>
-<li>在公告板，新闻组，邮件列表或类似的文章组中发布消息</li>
-<li>通过注册新增用户</li>
-<li>向数据处理程序提供一批数据，例如提交一个表单</li>
-<li>通过追加操作，扩展数据库数据</li>
-</ul>
-</li>
-<li><p>语法</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST /index.html</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Requests库实现</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.post(url,data = &#123;<span class="string">&#x27;key&#x27;</span>:<span class="string">&#x27;value&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>规范</p>
-<p>Hypertext Transfer Protocol (HTTP&#x2F;1.1): Semantics and Content</p>
-<p><a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.3">RFC 7231 - Hypertext Transfer Protocol (HTTP&#x2F;1.1): Semantics and Content</a></p>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p>HEAD</p>
-<p><strong>HTTP HEAD 方法</strong>请求资源的头部信息，并且这些头部信息与 HTTP <strong>GET</strong> 方法请求时返回的一致。该请求方法的一个使用场景是在下载一个大文件前先获取其大小再决定是否要下载，以此可以节约带宽资源。</p>
-<p>HEAD 方法的响应不应包含响应正文。即使包含了正文也必须忽略掉，虽然描述正文信息的 entity headers，例如 <code>Content-Length</code> 可能会包含在响应中，但它们并不是用来描述 HEAD 响应本身的，而是用来描述同样情况下 GET 请求应该返回的响应。</p>
-<p>如果 HEAD 请求的结果显示在上一次 GET 请求后缓存的资源已经过期了，即使没有发出 GET 请求，缓存也会失效。</p>
-<ul>
-<li><p>语法</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEAD /index.html</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Requests库实现</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.head(url)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>规范</p>
-<p>Hypertext Transfer Protocol (HTTP&#x2F;1.1): Semantics and Content</p>
-<p><a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.2">RFC 7231 - Hypertext Transfer Protocol (HTTP&#x2F;1.1): Semantics and Content</a></p>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p>CONNECT</p>
-<p>在HTTP协议中，<strong>CONNECT 方法</strong>可以开启一个客户端与所请求资源之间的双向沟通的通道。它可以用来创建隧道(tunnel)。</p>
-<p>例如，CONNECT 可以用来访问采用了 SSL(HTTPS) 协议的站点。客户端要求代理服务器将TCP连接作为通往目的主机隧道。之后该服务器会代替客户端与目的主机建立连接。连接建立好之后，代理服务器会面向客户端发送或接受TCP消息流。</p>
-<p>CONNECT 是一个应用范围为点到点的方法。</p>
-<ul>
-<li><p>语法</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONNECT www.example.com:<span class="number">443</span> HTTP/<span class="number">1.1</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>规范</p>
-<p>Hypertext Transfer Protocol (HTTP&#x2F;1.1): Semantics and Content</p>
-<p><a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.6">RFC 7231 - Hypertext Transfer Protocol (HTTP&#x2F;1.1): Semantics and Content</a></p>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p>PUT</p>
-<p><strong>HTTP PUT 请求方法</strong>使用请求中的负载创建或者替换目标资源。</p>
-<p>PUT 与 POST 的区别在于，PUT方法是幂等的：调用一次与连续调用多次是等价的（无副作用），而连续调用多次 POST 方法可能会有副作用，比如将一个订单重复提交多次。</p>
-<ul>
-<li><p>语法</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PUT /<span class="keyword">new</span>.html HTTP/<span class="number">1.1</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Requests库实现</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.put(url,data = &#123;<span class="string">&#x27;key&#x27;</span>=<span class="string">&#x27;value&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>规范</p>
-<p>Hypertext Transfer Protocol (HTTP&#x2F;1.1): Semantics and Content</p>
-<p><a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.4">RFC 7231 - Hypertext Transfer Protocol (HTTP&#x2F;1.1): Semantics and Content</a></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p>DELETE</p>
-<p><strong>HTTP DELETE 请求方法</strong> 用于删除指定的资源。</p>
-<ul>
-<li><p>语法</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE /file.html HTTP/<span class="number">1.1</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Requests库实现</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.delete(url)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>规范</p>
-<p>Hypertext Transfer Protocol (HTTP&#x2F;1.1): Semantics and Content</p>
-<p><a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.5">RFC 7231 - Hypertext Transfer Protocol (HTTP&#x2F;1.1): Semantics and Content</a></p>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p>OPTIONS</p>
-<p><strong>HTTP OPTIONS 请求方法</strong> 用于获取目的资源所支持的通信选项。客户端可以对特定的URL使用OPTIONS方法，也可以对整站(通过将URL设置为’*’)使用该方法。</p>
-<ul>
-<li><p>语法</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS /index.html HTTP/<span class="number">1.1</span></span><br><span class="line">OPTIONS * HTTP/<span class="number">1.1</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Requests库实现</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.options(url)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>规范</p>
-<p>Hypertext Transfer Protocol (HTTP&#x2F;1.1): Semantics and Content</p>
-<p><a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.7">RFC 7231 - Hypertext Transfer Protocol (HTTP&#x2F;1.1): Semantics and Content</a></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p>PATCH</p>
-<p><strong>HTTP PATCH 请求方法</strong> 用于对资源进行部分修改。</p>
-<p>在 HTTP 协议中，PUT 方法被用来表示对资源进行整体覆盖，而 POST 方法则没有对标准的补丁格式提供支持。不同于 PUT 方法，而与 POST 方法类似，PATCH 方法是非幂等的，这就意味着连续多个相同的请求会产生不同的效果。</p>
-<p>要判断一台服务器是否支持PATCH方法，需要查看它是否将其添加到了响应首部 Allow</p>
-</li>
-</ul>
-<hr>
-<ul>
-<li>TRACE</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/WEB/http-request-method.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
