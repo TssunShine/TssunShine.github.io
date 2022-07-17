@@ -28,7 +28,7 @@
 <meta property="og:description" content="Http Request Method HTTP Method 是可以自定义的，并且区分大小写。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-16T13:03:04.000Z">
-<meta property="article:modified_time" content="2022-07-17T17:21:31.046Z">
+<meta property="article:modified_time" content="2022-07-17T17:27:02.947Z">
 <meta property="article:author" content="TssunShine">
 <meta property="article:tag" content="Http">
 <meta name="twitter:card" content="summary">
@@ -117,7 +117,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#http-request-method"><span class="nav-text">Http Request Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#get"><span class="nav-text">GET</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post"><span class="nav-text">POST</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#head"><span class="nav-text">HEAD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#connect"><span class="nav-text">CONNECT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#put"><span class="nav-text">PUT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete"><span class="nav-text">DELETE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#requests%E5%BA%93%E5%AE%9E%E7%8E%B0"><span class="nav-text">Requests库实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E8%8C%83"><span class="nav-text">规范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#patch"><span class="nav-text">PATCH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trace"><span class="nav-text">TRACE</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#http-request-method"><span class="nav-text">Http Request Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#get"><span class="nav-text">GET</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#request%E5%BA%93%E5%AE%9E%E7%8E%B0"><span class="nav-text">Request库实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E8%8C%83"><span class="nav-text">规范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post"><span class="nav-text">POST</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-1"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#requests%E5%BA%93%E5%AE%9E%E7%8E%B0"><span class="nav-text">Requests库实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E8%8C%83-1"><span class="nav-text">规范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#head"><span class="nav-text">HEAD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-2"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#requests%E5%BA%93%E5%AE%9E%E7%8E%B0-1"><span class="nav-text">Requests库实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E8%8C%83-2"><span class="nav-text">规范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#connect"><span class="nav-text">CONNECT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-3"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E8%8C%83-3"><span class="nav-text">规范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#put"><span class="nav-text">PUT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-4"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#requests%E5%BA%93%E5%AE%9E%E7%8E%B0-2"><span class="nav-text">Requests库实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E8%8C%83-4"><span class="nav-text">规范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete"><span class="nav-text">DELETE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-5"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#requests%E5%BA%93%E5%AE%9E%E7%8E%B0-3"><span class="nav-text">Requests库实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E8%8C%83-5"><span class="nav-text">规范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#options"><span class="nav-text">OPTIONS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-6"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#requests%E5%BA%93%E5%AE%9E%E7%8E%B0-4"><span class="nav-text">Requests库实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E8%8C%83-6"><span class="nav-text">规范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#patch"><span class="nav-text">PATCH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trace"><span class="nav-text">TRACE</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -220,7 +220,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-07-18 01:21:31" itemprop="dateModified" datetime="2022-07-18T01:21:31+08:00">2022-07-18</time>
+      <time title="修改时间：2022-07-18 01:27:02" itemprop="dateModified" datetime="2022-07-18T01:27:02+08:00">2022-07-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -245,7 +245,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.4k</span>
+      <span>3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -269,14 +269,14 @@
 <h2 id="get">GET</h2>
 <p><strong>Http GET 方法</strong>请求指定的资源。使用
 <strong>GET</strong> 的请求一般只用于获取数据。</p>
-<p>### 语法</p>
-<pre><code><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /index.html</span><br></pre></td></tr></table></figure></code></pre>
-<p>### Request库实现</p>
-<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.get(url)</span><br></pre></td></tr></table></figure></code></pre>
-<p>### 规范</p>
-<pre><code>Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
-
-[https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1](https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1)</code></pre>
+<h3 id="语法">语法</h3>
+<p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /index.html</span><br></pre></td></tr></table></figure></p>
+<h3 id="request库实现">Request库实现</h3>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.get(url)</span><br></pre></td></tr></table></figure></p>
+<h3 id="规范">规范</h3>
+<p>Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content</p>
+<p><a
+target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1">https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1</a></p>
 <hr />
 <h2 id="post">POST</h2>
 <p><strong>Http POST 方法</strong>发送数据给服务器。请求主体的类型由
@@ -286,10 +286,9 @@ POST方法的区别是，PUT方法是幂等的：连续调用一次或者多次�
 <ul>
 <li><p>一个 POST 请求通常是通过 HTML
 表单发送，并返回服务器的修改结果。在这种情况下 content-type 是通过在
-/</p>
-<form/>
-<p>元素中设置正确的 <code>enctype</code> 属性，或是在 /<input/> 和
-/<button/> 元素中设置 <code>formenctype</code> 属性来选择的</p>
+<em>form</em> 元素中设置正确的 <code>enctype</code> 属性，或是在
+<em>input</em> 和 <em>button</em> 元素中设置 <code>formenctype</code>
+属性来选择的</p>
 <ul>
 <li><code>application/x-www-form-urlencoded</code>
 ：数据被编码成以’&amp;’分隔的键-值对，同时以’=’分隔键和值。非字母或数字的字符会被<strong>percent-encoding：</strong>该类型不支持二进制数据的原因（以<code>Multipart/form-data</code>代替）</li>
@@ -307,14 +306,16 @@ POST以统一的方法涵盖以下功能</p>
 <li>通过追加操作，扩展数据库数据</li>
 </ul></li>
 </ul>
-<p>### 语法</p>
-<pre><code><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST /index.html</span><br></pre></td></tr></table></figure></code></pre>
-<p>### Requests库实现</p>
-<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.post(url,data = &#123;<span class="string">&#x27;key&#x27;</span>:<span class="string">&#x27;value&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure></code></pre>
-<p>### 规范</p>
-<pre><code>Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
-
-[RFC 7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content](https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.3)</code></pre>
+<h3 id="语法-1">语法</h3>
+<p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST /index.html</span><br></pre></td></tr></table></figure></p>
+<h3 id="requests库实现">Requests库实现</h3>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.post(url,data = &#123;<span class="string">&#x27;key&#x27;</span>:<span class="string">&#x27;value&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="规范-1">规范</h3>
+<p>Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content</p>
+<p><a
+target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.3">RFC
+7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and
+Content</a></p>
 <hr />
 <h2 id="head">HEAD</h2>
 <p><strong>HTTP HEAD 方法</strong>请求资源的头部信息，并且这些头部信息与
@@ -327,14 +328,16 @@ entity headers，例如 <code>Content-Length</code>
 响应本身的，而是用来描述同样情况下 GET 请求应该返回的响应。</p>
 <p>如果 HEAD 请求的结果显示在上一次 GET
 请求后缓存的资源已经过期了，即使没有发出 GET 请求，缓存也会失效。</p>
-<p>### 语法</p>
-<pre><code><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEAD /index.html</span><br></pre></td></tr></table></figure></code></pre>
-<p>### Requests库实现</p>
-<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.head(url)</span><br></pre></td></tr></table></figure></code></pre>
-<p>### 规范</p>
-<pre><code>Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
-
-[RFC 7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content](https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.2)</code></pre>
+<h3 id="语法-2">语法</h3>
+<p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEAD /index.html</span><br></pre></td></tr></table></figure></p>
+<h3 id="requests库实现-1">Requests库实现</h3>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.head(url)</span><br></pre></td></tr></table></figure></p>
+<h3 id="规范-2">规范</h3>
+<p>Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content</p>
+<p><a
+target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.2">RFC
+7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and
+Content</a></p>
 <hr />
 <h2 id="connect">CONNECT</h2>
 <p>在HTTP协议中，<strong>CONNECT
@@ -342,12 +345,14 @@ entity headers，例如 <code>Content-Length</code>
 <p>例如，CONNECT 可以用来访问采用了 SSL(HTTPS)
 协议的站点。客户端要求代理服务器将TCP连接作为通往目的主机隧道。之后该服务器会代替客户端与目的主机建立连接。连接建立好之后，代理服务器会面向客户端发送或接受TCP消息流。</p>
 <p>CONNECT 是一个应用范围为点到点的方法。</p>
-<p>### 语法</p>
-<pre><code><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONNECT www.example.com:<span class="number">443</span> HTTP/<span class="number">1.1</span></span><br></pre></td></tr></table></figure></code></pre>
-<p>### 规范</p>
-<pre><code>Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
-
-[RFC 7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content](https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.6)</code></pre>
+<h3 id="语法-3">语法</h3>
+<p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONNECT www.example.com:<span class="number">443</span> HTTP/<span class="number">1.1</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="规范-3">规范</h3>
+<p>Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content</p>
+<p><a
+target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.6">RFC
+7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and
+Content</a></p>
 <hr />
 <h2 id="put">PUT</h2>
 <p><strong>HTTP PUT
@@ -355,44 +360,52 @@ entity headers，例如 <code>Content-Length</code>
 <p>PUT 与 POST
 的区别在于，PUT方法是幂等的：调用一次与连续调用多次是等价的（无副作用），而连续调用多次
 POST 方法可能会有副作用，比如将一个订单重复提交多次。</p>
-<p>### 语法</p>
-<pre><code><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PUT /<span class="keyword">new</span>.html HTTP/<span class="number">1.1</span></span><br></pre></td></tr></table></figure></code></pre>
-<p>### Requests库实现</p>
-<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.put(url,data = &#123;<span class="string">&#x27;key&#x27;</span>=<span class="string">&#x27;value&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure></code></pre>
-<p>### 规范</p>
-<pre><code>Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
-
-[RFC 7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content](https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.4)</code></pre>
+<h3 id="语法-4">语法</h3>
+<p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PUT /<span class="keyword">new</span>.html HTTP/<span class="number">1.1</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="requests库实现-2">Requests库实现</h3>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.put(url,data = &#123;<span class="string">&#x27;key&#x27;</span>=<span class="string">&#x27;value&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="规范-4">规范</h3>
+<p>Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content</p>
+<p><a
+target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.4">RFC
+7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and
+Content</a></p>
 <hr />
 <h2 id="delete">DELETE</h2>
-<pre><code>**HTTP DELETE 请求方法** 用于删除指定的资源。</code></pre>
-<h3 id="语法">语法</h3>
-<pre><code>  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE /file.html HTTP/<span class="number">1.1</span></span><br></pre></td></tr></table></figure></code></pre>
-<h3 id="requests库实现">Requests库实现</h3>
-<pre><code>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.delete(url)</span><br></pre></td></tr></table></figure></code></pre>
-<h3 id="规范">规范</h3>
-<pre><code>  Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
-
-  [RFC 7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content](https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.5)</code></pre>
+<p><strong>HTTP DELETE 请求方法</strong> 用于删除指定的资源。</p>
+<h3 id="语法-5">语法</h3>
+<p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE /file.html HTTP/<span class="number">1.1</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="requests库实现-3">Requests库实现</h3>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.delete(url)</span><br></pre></td></tr></table></figure></p>
+<h3 id="规范-5">规范</h3>
+<p>Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content</p>
+<p><a
+target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.5">RFC
+7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and
+Content</a></p>
 <hr />
-<p>## OPTIONS</p>
+<h2 id="options">OPTIONS</h2>
 <p><strong>HTTP OPTIONS 请求方法</strong>
 用于获取目的资源所支持的通信选项。客户端可以对特定的URL使用OPTIONS方法，也可以对整站(通过将URL设置为’*’)使用该方法。</p>
-<p>### 语法</p>
-<pre><code><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS /index.html HTTP/<span class="number">1.1</span></span><br><span class="line">OPTIONS * HTTP/<span class="number">1.1</span></span><br></pre></td></tr></table></figure></code></pre>
-<p>### Requests库实现</p>
-<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.options(url)</span><br></pre></td></tr></table></figure></code></pre>
-<p>### 规范</p>
-<pre><code>Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
-
-[RFC 7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content](https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.7)</code></pre>
+<h3 id="语法-6">语法</h3>
+<p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS /index.html HTTP/<span class="number">1.1</span></span><br><span class="line">OPTIONS * HTTP/<span class="number">1.1</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="requests库实现-4">Requests库实现</h3>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.options(url)</span><br></pre></td></tr></table></figure></p>
+<h3 id="规范-6">规范</h3>
+<p>Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content</p>
+<p><a
+target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.7">RFC
+7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and
+Content</a></p>
 <hr />
 <h2 id="patch">PATCH</h2>
-<pre><code>**HTTP PATCH 请求方法** 用于对资源进行部分修改。
-
-在 HTTP 协议中，PUT 方法被用来表示对资源进行整体覆盖，而 POST 方法则没有对标准的补丁格式提供支持。不同于 PUT 方法，而与 POST 方法类似，PATCH 方法是非幂等的，这就意味着连续多个相同的请求会产生不同的效果。
-
-要判断一台服务器是否支持PATCH方法，需要查看它是否将其添加到了响应首部 Allow</code></pre>
+<p><strong>HTTP PATCH 请求方法</strong> 用于对资源进行部分修改。</p>
+<p>在 HTTP 协议中，PUT 方法被用来表示对资源进行整体覆盖，而 POST
+方法则没有对标准的补丁格式提供支持。不同于 PUT 方法，而与 POST
+方法类似，PATCH
+方法是非幂等的，这就意味着连续多个相同的请求会产生不同的效果。</p>
+<p>要判断一台服务器是否支持PATCH方法，需要查看它是否将其添加到了响应首部
+Allow</p>
 <hr />
 <h2 id="trace">TRACE</h2>
 
