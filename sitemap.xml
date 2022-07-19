@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://tssunshine.github.io/uncategorized/http-status-code.html</loc>
+    
+    <lastmod>2022-07-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://tssunshine.github.io/WEB/http-request-method.html</loc>
     
     <lastmod>2022-07-18</lastmod>
@@ -40,7 +49,7 @@
 
   <url>
     <loc>https://tssunshine.github.io/</loc>
-    <lastmod>2022-07-18</lastmod>
+    <lastmod>2022-07-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -48,14 +57,14 @@
   
   <url>
     <loc>https://tssunshine.github.io/tags/Http/</loc>
-    <lastmod>2022-07-18</lastmod>
+    <lastmod>2022-07-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://tssunshine.github.io/tags/CTFHUB/</loc>
-    <lastmod>2022-07-18</lastmod>
+    <loc>https://tssunshine.github.io/tags/CTFHub/</loc>
+    <lastmod>2022-07-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -64,7 +73,7 @@
   
   <url>
     <loc>https://tssunshine.github.io/categories/WEB/</loc>
-    <lastmod>2022-07-18</lastmod>
+    <lastmod>2022-07-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
