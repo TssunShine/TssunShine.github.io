@@ -1,4 +1,4 @@
-https://tssunshine.github.io/uncategorized/http-status-code.html
+https://tssunshine.github.io/WEB/http-status-code.html
 https://tssunshine.github.io/WEB/http-request-method.html
 https://tssunshine.github.io/about/index.html
 https://tssunshine.github.io/tags/index.html
