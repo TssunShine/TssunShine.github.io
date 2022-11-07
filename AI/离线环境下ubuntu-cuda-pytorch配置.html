@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tssunshine.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="因工作需要，需要在完全离线的环境下搭建GPU服务器，并配置cuda+PyTorch环境，记录一下基本的步骤以及踩过的坑。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="离线环境下Ubuntu+cuda+Pytorch配置">
+<meta property="og:url" content="https://tssunshine.github.io/AI/%E7%A6%BB%E7%BA%BF%E7%8E%AF%E5%A2%83%E4%B8%8Bubuntu-cuda-pytorch%E9%85%8D%E7%BD%AE.html">
+<meta property="og:site_name" content="TssunShine&#39;s CyberSpace">
+<meta property="og:description" content="因工作需要，需要在完全离线的环境下搭建GPU服务器，并配置cuda+PyTorch环境，记录一下基本的步骤以及踩过的坑。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-01T09:38:54.000Z">
+<meta property="article:modified_time" content="2022-08-05T07:36:22.000Z">
+<meta property="article:author" content="TssunShine">
+<meta property="article:tag" content="Pytorch">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://tssunshine.github.io/AI/%E7%A6%BB%E7%BA%BF%E7%8E%AF%E5%A2%83%E4%B8%8Bubuntu-cuda-pytorch%E9%85%8D%E7%BD%AE.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://tssunshine.github.io/AI/%E7%A6%BB%E7%BA%BF%E7%8E%AF%E5%A2%83%E4%B8%8Bubuntu-cuda-pytorch%E9%85%8D%E7%BD%AE.html","path":"AI/离线环境下ubuntu-cuda-pytorch配置.html","title":"离线环境下Ubuntu+cuda+Pytorch配置"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>离线环境下Ubuntu+cuda+Pytorch配置 | TssunShine's CyberSpace</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TssunShine's CyberSpace</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Just for Note Maybe for Tool</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ubuntu%E5%AE%89%E8%A3%85"><span class="nav-text">Ubuntu安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nvidia%E9%A9%B1%E5%8A%A8%E5%AE%89%E8%A3%85"><span class="nav-text">Nvidia驱动安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85gcc"><span class="nav-text">安装GCC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B8%E8%BD%BD%E6%97%A7%E7%89%88nvidia%E9%A9%B1%E5%8A%A8"><span class="nav-text">卸载旧版Nvidia驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A6%81%E7%94%A8nouveau"><span class="nav-text">禁用nouveau</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85nvidia%E9%A9%B1%E5%8A%A8"><span class="nav-text">安装Nvidia驱动</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cuda%E5%AE%89%E8%A3%85"><span class="nav-text">cuda安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pytorch%E5%AE%89%E8%A3%85"><span class="nav-text">PyTorch安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#spyder-ide"><span class="nav-text">Spyder IDE</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="TssunShine"
+      src="/images/profile.png">
+  <p class="site-author-name" itemprop="name">TssunShine</p>
+  <div class="site-description" itemprop="description">关于学习人工智能安全以及CTF的笔记本</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/TssunShine" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;TssunShine" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:shaoshan.tian@qq.com" title="E-Mail → mailto:shaoshan.tian@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tssunshine.github.io/AI/%E7%A6%BB%E7%BA%BF%E7%8E%AF%E5%A2%83%E4%B8%8Bubuntu-cuda-pytorch%E9%85%8D%E7%BD%AE.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.png">
+      <meta itemprop="name" content="TssunShine">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TssunShine's CyberSpace">
+      <meta itemprop="description" content="关于学习人工智能安全以及CTF的笔记本">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="离线环境下Ubuntu+cuda+Pytorch配置 | TssunShine's CyberSpace">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          离线环境下Ubuntu+cuda+Pytorch配置
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-01 17:38:54" itemprop="dateCreated datePublished" datetime="2022-08-01T17:38:54+08:00">2022-08-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-08-05 15:36:22" itemprop="dateModified" datetime="2022-08-05T15:36:22+08:00">2022-08-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>因工作需要，需要在完全离线的环境下搭建GPU服务器，并配置cuda+PyTorch环境，记录一下基本的步骤以及踩过的坑。</p>
+<span id="more"></span>
+<h1 id="ubuntu安装">Ubuntu安装</h1>
+<p>因离线及特殊原因，无法使用启动u盘，在ubuntu网站下载iso镜像后进行刻盘，使用光盘引导启动。ubuntu正常安装即可，但是iso镜像需用加密u盘单独拷贝至硬盘里备用。</p>
+<h1 id="nvidia驱动安装">Nvidia驱动安装</h1>
+<p>Nvidia驱动在Nvidia网站即可下载，对应处理器版本下载即可。</p>
+<h2 id="安装gcc">安装GCC</h2>
+<p>作为Linux开发版，Ubuntu出厂不带CC等编译器让人感到匪夷所思，离线状态下不能使用包管理器，使用dpkg安装各个pkg包时递归查看依赖太折磨人，尝试使用上文提到的iso镜像作为apt本地源。</p>
+<p>首先将iso镜像复制到文件系统中，便于说明假设是<code>~/Downloads/ubuntu-xxxx.iso</code>。</p>
+<p>备份<strong>sources.list</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mv</span> /etc/apt/sources.list /etc/apt/sources.list.backup</span><br></pre></td></tr></table></figure>
+<p>在<code>/mnt</code>创建挂载点，即创建文件夹，文件夹名字随意，避免出现中文。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> /mnt/ubuntu</span><br></pre></td></tr></table></figure>
+<p>在挂载点挂载iso镜像。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount -o loop ~/Downloads/ubuntu-xxxx.iso /mnt/ubuntu</span><br></pre></td></tr></table></figure>
+<p>编辑<strong>sources.list</strong>，其中文件夹后为发行版代号，如果不明确的话也可以用<strong>stable</strong>代替。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sources.list 本地源</span></span><br><span class="line">deb file:///mnt/ubuntu focal main restricted</span><br></pre></td></tr></table></figure>
+<p>更新apt索引。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt clean all</span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+<p>安装cc等编译器，这里推荐<strong>build-essential</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential</span><br></pre></td></tr></table></figure>
+<p>测试<strong>gcc g++</strong>等命令是否可用。</p>
+<h2 id="卸载旧版nvidia驱动">卸载旧版Nvidia驱动</h2>
+<p>使用apt卸载安装系统时自动安装的Nvidia驱动。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get --purge remove nvidia*</span><br><span class="line">sudo apt autoremove</span><br></pre></td></tr></table></figure>
+<h2 id="禁用nouveau">禁用nouveau</h2>
+<p>接下来需要禁用<strong>nouveau</strong>驱动，否则会引起冲突。首先使用以下命令查看是否有关于nouveau的输出，若有则说明nouveau驱动已被系统挂载。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep nouveau</span><br></pre></td></tr></table></figure>
+<p>编辑配置文件，将nouveau添加至黑名单。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/modprobe.d/blacklist.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#在文件末尾添加以下两条语句</span><br><span class="line">blacklist nouveau</span><br><span class="line">options nouveau modeset=0</span><br></pre></td></tr></table></figure>
+<p>重新生成Kernel initramfs。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-initramfs -u</span><br></pre></td></tr></table></figure>
+<p>重启。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
+<h2 id="安装nvidia驱动">安装Nvidia驱动</h2>
+<p>重启后，按 <strong>Ctrl+Alt+F3</strong> 进入 <strong>TTY</strong>
+模式。</p>
+<p>测试nouveau是否被禁用，若无输出信息则可进行下一步。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep nouveau</span><br></pre></td></tr></table></figure>
+<p>赋予驱动文件可执行权限，并执行安装。<code>--no-opengl-files</code>只安装驱动文件，不安装OpenGL文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> 777 NVIDIA-Linux-x86_64-xxx.xx.run</span><br><span class="line">sudo sh NVIDIA-Linux-x86_64-xxx.xx.run --no-opengl-files</span><br></pre></td></tr></table></figure>
+<p>其余选项结合自身来选，安装结束后重启。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
+<p>重启后使用 <code>nvidia-smi</code> 查看驱动是否安装完成。</p>
+<h1 id="cuda安装">cuda安装</h1>
+<p>对于安装位置，若不同用户需要安装不同版本cuda，则安装在各自用户文件夹内，单用户情景下可直接使用
+<strong>sudo</strong> 安装。</p>
+<p>赋予cuda文件可执行权限并安装，由于已安装过驱动，所以在安装选项中取消驱动的勾选。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> a+x cuda_xxxxxxxx.run</span><br><span class="line">sudo sh cuda_xxxxxxxx.run</span><br></pre></td></tr></table></figure>
+<h1 id="pytorch安装">PyTorch安装</h1>
+<p>考虑到将来可能还会配置其余如 <strong>tensorflow</strong>
+等环境，故使用 <strong>conda</strong>
+组织包环境，但是由于考虑上的疏忽，第一次安装时使用了
+<strong>miniconda</strong> ，在后续安装 <strong>python 库包</strong>
+以及 <strong>python IDE</strong>
+时，对依赖的安装产生了巨大的影响，以至于在安装IDE时不得已删除了整个conda环境。</p>
+<p>假如是在完全离线的服务器上安装conda环境，建议使用
+<strong>Anaconda</strong> ，其自带 <strong>Spyder</strong>
+等IDE与诸多Python类库，方便后续安装。</p>
+<p>赋予 <strong>Anaconda</strong>
+安装文件执行权限并进行安装，推荐分用户安装，安装完成后允许 <strong>conda
+initializer</strong> 进行初始化。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> a+x Anaconda3-xxxxxxxxx.sh</span><br><span class="line">./Anaconda3-xxxxxxxxx.sh</span><br><span class="line"><span class="comment">#conda initializer</span></span><br><span class="line"><span class="built_in">yes</span></span><br></pre></td></tr></table></figure>
+<p>创建 <strong>pytorch</strong> 虚拟环境，便于组织库包。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -n pytorch python pip</span><br><span class="line">conda activate pytorch</span><br></pre></td></tr></table></figure>
+<p>PyTorch 依赖 Numpy 库，而后续安装的 pandas 等库包中一部分也依赖
+Numpy，但其依赖的版本不一样，第一次安装时出现了冲突，且离线情况下会出现安装一个库提示依赖另一个库包，无限套娃。思考参考
+apt 本地源，创建 pip 本地源。</p>
+<p>由于第一次安装时尝试用 pip 安装依赖，然后用 conda
+安装库包，处理依赖本地源时不需要把
+pytorch/torchvision等包放进去，但后续实践表明完全可以一次性封装好，将pytorch与依赖库包放在一起用
+pip 安装，没必要执着于 conda 安装，conda 自身离线源创建比较麻烦。</p>
+<p>为了便于制作离线源，首先需要 <strong>requirements.txt</strong> 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">charset-normalizer==<span class="number">2.1</span><span class="number">.0</span></span><br><span class="line">cycler==<span class="number">0.11</span><span class="number">.0</span></span><br><span class="line">dpcpp-cpp-rt==<span class="number">2022.1</span><span class="number">.0</span></span><br><span class="line">fonttools==<span class="number">4.34</span><span class="number">.4</span></span><br><span class="line">idna==<span class="number">3.3</span></span><br><span class="line">intel-cmplr-lib-rt==<span class="number">2022.1</span><span class="number">.0</span></span><br><span class="line">intel-cmplr-lic-rt==<span class="number">2022.1</span><span class="number">.0</span></span><br><span class="line">intel-opencl-rt==<span class="number">2022.1</span><span class="number">.0</span></span><br><span class="line">intel-openmp==<span class="number">2022.1</span><span class="number">.0</span></span><br><span class="line">kiwisolver==<span class="number">1.4</span><span class="number">.4</span></span><br><span class="line">matplotlib==<span class="number">3.5</span><span class="number">.2</span></span><br><span class="line">mkl==<span class="number">2022.1</span><span class="number">.0</span></span><br><span class="line">mkl-fft==<span class="number">1.3</span><span class="number">.1</span></span><br><span class="line">mkl-random==<span class="number">1.2</span><span class="number">.2</span></span><br><span class="line">numpy==<span class="number">1.22</span><span class="number">.4</span></span><br><span class="line">opencv-python==<span class="number">4.6</span><span class="number">.0</span><span class="number">.66</span></span><br><span class="line">packaging==<span class="number">21.3</span></span><br><span class="line">pandas==<span class="number">1.4</span><span class="number">.3</span></span><br><span class="line">Pillow==<span class="number">9.2</span><span class="number">.0</span></span><br><span class="line">pyparsing==<span class="number">3.0</span><span class="number">.9</span></span><br><span class="line">python-dateutil==<span class="number">2.8</span><span class="number">.2</span></span><br><span class="line">pytz==<span class="number">2022.1</span></span><br><span class="line">requests==<span class="number">2.28</span><span class="number">.1</span></span><br><span class="line">scipy==<span class="number">1.8</span><span class="number">.1</span></span><br><span class="line">six==<span class="number">1.16</span><span class="number">.0</span></span><br></pre></td></tr></table></figure>
+<p>根据 <strong>requirements.txt</strong>
+下载wheel包至指定文件夹中，方便打包。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip download -d packages/ -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>将上述指定<strong>文件夹</strong>与 <strong>requirements.txt</strong>
+打包压缩，一起拷贝至离线服务器。在离线服务器解压后，开始安装。使用pytorch虚拟环境中的
+<strong>pip</strong> 命令，命令中的 <strong>find-link</strong> 需替换为
+<strong>wheel</strong> 文件夹相对路径，<strong>requirements.txt</strong>
+需要相对路径。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --no-index --find-links=packages/ -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>至此 PyTorch 安装告一段落，可在 <strong>Python解释器</strong>
+中通过以下语句测试。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">torch.cuda.is_available()</span><br></pre></td></tr></table></figure>
+<p>若出现 <strong>libxxx.so</strong>
+缺失，首先确定缺失的动态链接库对应的库包有没有安装，若已安装仍报错，则需要建立软连接，首先到<code>~/anaconda3/envs/pytorch/lib</code>文件夹中，查看有无与相应动态链接库名字相似的动态链接库，如果存在，直接通过下述命令添加软链接即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">ln</span> -s libxxx.xxxxx.so libxxx.so</span><br></pre></td></tr></table></figure>
+<p>第一个参数是文件夹中存在的动态链接库名，第二个链接是Python报错的动态链接库名。添加完成后回到
+Python
+解释器重新导入，若有其他动态链接库缺失则通过相同方法添加软链接。若缺失动态链接库为
+<strong>libcuxxx.so</strong>
+则为cuda库，需要去cuda安装目录寻找动态链接库。</p>
+<h1 id="spyder-ide">Spyder IDE</h1>
+<p>使用 Anaconda 可以很方便的使用 Spyder 作为 Python IDE，以下介绍将
+Spyder 添加至桌面快捷方式的方法，方便直接使用。</p>
+<p>在 <code>/usr/share/applications</code>下创建 Spyder
+快捷方式文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/share/applications</span><br><span class="line">sudo gedit spyder3.desktop</span><br></pre></td></tr></table></figure>
+<p>编辑 <strong>spyder3.desktop</strong> 文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Encoding=UTF-8</span><br><span class="line">Name=Spyder3</span><br><span class="line">Comment=Python IDE</span><br><span class="line">Exec=/home/&lt;username&gt;/anacondas/bin/spyder</span><br><span class="line">Icon=/home/&lt;username&gt;/anacondas/share/icons/spyder3.png</span><br><span class="line">StartupNotify=True</span><br><span class="line">Terminal=False</span><br><span class="line">Categories=Development;Science;IDE;Qt;</span><br><span class="line">Type=Application</span><br><span class="line">MimeType=text/x-python;</span><br><span class="line">X-AppStream-Ignore=True</span><br></pre></td></tr></table></figure>
+<p>赋予可执行权限。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> 777 spyder3.desktop</span><br></pre></td></tr></table></figure>
+<p>此时，即可在桌面上直接点击使用 Spyder ，并可在 Spyder 中选择 PyTorch
+环境作为 Python 环境。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Pytorch/" rel="tag"># Pytorch</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/WEB/web%E6%8A%80%E5%B7%A7-%E9%9A%8F%E6%97%B6%E6%95%B4%E7%90%86%E5%BD%92%E7%BA%B3%E6%9B%B4%E6%96%B0.html" rel="prev" title="WEB技巧 随时整理归纳更新">
+                  <i class="fa fa-chevron-left"></i> WEB技巧 随时整理归纳更新
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TssunShine</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">12k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11 分钟</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
